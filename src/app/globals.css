@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+   scroll-behavior: smooth;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  background-color: #000;
+  color: #ffffff;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+
+
+main {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+}
+
+.slick-track {
+  height: calc(100vh - 100px);
+}
+.slick-dots li {
+  border-radius: 50%;
+  border: 1px solid white;
+  background: #FDD901;
+  color: #FDD901;
+}
+.slick-dots .slick-active {
+  background-color: #000;
+}
+.slick-dots li button::before, .slick-dots li.slick-active > button::before {
+  color: #FDD901;
+ 
+}
+
