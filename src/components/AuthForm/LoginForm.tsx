@@ -7,7 +7,7 @@ import Image from "next/image";
 import Eyes from "@/public/images/eyes.png";
 import styles from "@/components/Table/input.module.css";
 import Button from "../Button";
-import { loginUser, registerUser } from "@/lib/auth/action";
+import { loginUser} from "@/lib/auth/action";
 import { useForm } from "react-hook-form";
 import cn from "@/utils/cn";
 

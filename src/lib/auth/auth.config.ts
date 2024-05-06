@@ -1,7 +1,7 @@
-import { NextAuthConfig, User} from "next-auth";
+import { NextAuthConfig, User } from "next-auth";
 import { AdapterSession, AdapterUser } from "next-auth/adapters";
 import { JWT } from "next-auth/jwt";
-
+import { useRouter } from "next/router";
 
 interface ExtendedToken extends JWT {
   id: string | undefined;
@@ -19,23 +19,22 @@ interface ExtendedSession extends AdapterSession {
 
 const authConfig: NextAuthConfig = {
   pages: {
-    signIn: "/login" || "/register",
+    signIn: "/login",
   },
   providers: [],
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-       
         const extendedToken = token as ExtendedToken;
         extendedToken.id = user.id;
         extendedToken.isAdmin = (user as ExtendedUser).isAdmin;
       }
-      
+
       return token;
     },
     async session({ session, token }) {
       if (token) {
-        const extendedUser  = {
+        const extendedUser = {
           ...(session.user as ExtendedUser),
           id: token.id as string,
           isAdmin: token.isAdmin as boolean,
@@ -46,7 +45,7 @@ const authConfig: NextAuthConfig = {
     },
     authorized({ auth, request }) {
       const user = auth?.user as ExtendedUser | undefined;
-      
+
       const isOnAdminPanel = request.nextUrl?.pathname.startsWith("/game");
       const isOnLoginPage = request.nextUrl?.pathname.startsWith("/login");
       const isOnRegisterPage =
@@ -56,8 +55,8 @@ const authConfig: NextAuthConfig = {
         return false;
       }
 
-      if ((isOnLoginPage || isOnRegisterPage) && user) {
-        return Response.redirect(new URL("/", request.nextUrl));
+      if (isOnLoginPage && user) {
+        return Response.redirect(new URL("https://mafia-club-sigma.vercel.app/", request.nextUrl));
       }
 
       return true;
