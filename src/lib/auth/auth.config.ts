@@ -56,7 +56,7 @@ const authConfig: NextAuthConfig = {
       }
 
       if ((isOnLoginPage || isOnRegisterPage) && user) {
-        return Response.redirect(new URL("https://mafia-club-sigma.vercel.app/", request.nextUrl));
+        return Response.redirect(new URL("/", request.nextUrl));
       }
 
       return true;
